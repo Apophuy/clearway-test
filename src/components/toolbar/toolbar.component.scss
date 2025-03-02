@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+
+:host {
+  width: 100%;
+  position: relative;
+}
+
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--mat-sys-level5);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.button {
+  height: 40px;
+
+  &__block {
+    display: flex;
+    gap: 40px;
+  }
+}
+
+.zoom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

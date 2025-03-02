@@ -1,0 +1,25 @@
+<mat-toolbar class="toolbar">
+  <mat-toolbar-row>
+    <a mat-button [routerLink]="['/']"><h1>Clearway Test</h1></a>
+    <span class="spacer"></span>
+    <h1 *ngIf="currentPageName">
+      {{ currentPageName || 'Название документа не указано' }}
+    </h1>
+    <span class="spacer"></span>
+    <div class="button__block">
+      <div class="zoom">
+        <button mat-mini-fab>
+          <mat-icon>add</mat-icon>
+        </button>
+        <span>10</span>
+        <button mat-mini-fab>
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <button mat-fab extended class="button">
+        <mat-icon>save</mat-icon>
+        Сохранить
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

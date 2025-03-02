@@ -1,3 +1,40 @@
+@use '@angular/material' as mat;
+@use '@angular/material/core/tokens/m3-system' as m3-system;
+@use '@angular/material/core/theming/palettes' as palettes;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  @include m3-system.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: palettes.$cyan-palette,
+        tertiary: palettes.$orange-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: var(--mat-sys-secondary-container),
+      container-text-color: var(--mat-sys-on-secondary-container),
+    )
+  );
+
+  background-color: var(--mat-sys-secondary);
+}
