@@ -1,0 +1,35 @@
+<div class="modal">
+  <h2 mat-dialog-title>Добавить аннотацию</h2>
+  <mat-dialog-content>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="Добавить текст" [disabled]="!!imageFile">
+        <div class="tab__content">
+          <input matInput placeholder="Введите текст" (input)="onTextEnter($event)" />
+          <button mat-fab extended>
+            <mat-icon>text_fields</mat-icon>
+            Добавить текст
+          </button>
+        </div>
+      </mat-tab>
+      <mat-tab label="Добавить изображение" [disabled]="!!inputText">
+        <div class="tab__content">
+          <input
+            type="file"
+            #fileUpload
+            (change)="onImportImageSelect($event)"
+            accept="image/*"
+            [style.display]="'none'"
+          />
+          <button mat-fab extended (click)="fileUpload.click()">
+            <mat-icon>downloading</mat-icon>
+            Загрузить изображение
+          </button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="onCancel()">Отмена</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+  </mat-dialog-actions>
+</div>

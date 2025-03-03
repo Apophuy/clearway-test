@@ -1,0 +1,15 @@
+.modal {
+  background-color: var(--mat-sys-primary-container);
+  width: 500px;
+}
+
+.tab {
+  &__content {
+    height: 80px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+}
