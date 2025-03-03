@@ -6,12 +6,12 @@
       {{ currentPageName || 'Название документа не указано' }}
     </h1>
     <span class="spacer"></span>
-    <div class="button__block">
+    <div class="button__block" *ngIf="currentPageName">
       <div class="zoom">
         <button mat-mini-fab>
           <mat-icon>add</mat-icon>
         </button>
-        <span>10</span>
+        <span>1</span>
         <button mat-mini-fab>
           <mat-icon>remove</mat-icon>
         </button>
