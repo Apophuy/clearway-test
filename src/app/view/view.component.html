@@ -1,6 +1,6 @@
 <div class="view">
   <div class="list" appResize [zoom]="zoomService.currentZoomLevel" appPosition>
-    <div *ngFor="let image of data?.pages" class="image">
+    <div *ngFor="let image of data?.pages" class="image" (click)="openModal(image.pageId)">
       <img class="image__item" matListAvatar [src]="`/data/${image.imageUrl}`" />
     </div>
   </div>
