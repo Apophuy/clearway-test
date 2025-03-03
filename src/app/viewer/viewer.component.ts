@@ -6,6 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../services/data.service';
+import { ZoomService } from '../../services/zoom.service';
 import { Data } from '../../types';
 
 @Component({
@@ -23,6 +24,7 @@ export class ViewerComponent {
   constructor(
     private dataService: DataService,
     private router: Router,
+    public zoomService: ZoomService,
   ) {}
 
   ngOnInit(): void {
