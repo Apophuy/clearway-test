@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../services/data.service';
+import { ZoomService } from '../../services/zoom.service';
 import { getCurrentPageId } from '../../utils';
 
 @Component({
@@ -20,7 +21,13 @@ export class ToolbarComponent {
   constructor(
     private router: Router,
     private dataService: DataService,
+    public zoomService: ZoomService,
   ) {}
+
+  goHome() {
+    this.router.navigate(['/']);
+    this.zoomService.currentZoomLevel = 1;
+  }
 
   ngDoCheck(): void {
     const pageId = getCurrentPageId(this.router.url);

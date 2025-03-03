@@ -2,13 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { PositionDirective } from '../../directives/position.directive';
+import { ResizeDirective } from '../../directives/resize.directive';
 import { DataService } from '../../services/data.service';
 import { ZoomService } from '../../services/zoom.service';
 import { Data } from '../../types';
 
 @Component({
   selector: 'app-view',
-  imports: [CommonModule],
+  imports: [CommonModule, ResizeDirective, PositionDirective],
   templateUrl: './view.component.html',
   styleUrl: './view.component.scss',
 })
@@ -18,7 +20,7 @@ export class ViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private zoomService: ZoomService,
+    public zoomService: ZoomService,
   ) {}
 
   sub$: Subscription | undefined;
@@ -36,10 +38,6 @@ export class ViewComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.zoomService.zoomingElement = this.doc;
-    console.log('ngAfterViewInit', this.pageId, this.data);
-  }
   ngDoCheck(): void {
     console.log('ngDoCheck', this.pageId, this.data);
   }

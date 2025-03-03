@@ -1,5 +1,5 @@
 <div class="view">
-  <div class="list" #doc>
+  <div class="list" appResize [zoom]="zoomService.currentZoomLevel" appPosition>
     <div *ngFor="let image of data?.pages" class="image">
       <img class="image__item" matListAvatar [src]="`/data/${image.imageUrl}`" />
     </div>

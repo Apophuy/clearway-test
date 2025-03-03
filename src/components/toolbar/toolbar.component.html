@@ -1,6 +1,6 @@
 <mat-toolbar class="toolbar">
   <mat-toolbar-row>
-    <a mat-button [routerLink]="['/']"><h1>Clearway Test</h1></a>
+    <a mat-button (click)="goHome()"><h1>Clearway Test</h1></a>
     <span class="spacer"></span>
     <h1 *ngIf="currentPageName">
       {{ currentPageName || 'Название документа не указано' }}
@@ -8,11 +8,11 @@
     <span class="spacer"></span>
     <div class="button__block" *ngIf="currentPageName">
       <div class="zoom">
-        <button mat-mini-fab>
+        <button mat-mini-fab (click)="zoomService.zoomIn()">
           <mat-icon>add</mat-icon>
         </button>
-        <span>1</span>
-        <button mat-mini-fab>
+        <span>{{ (zoomService.currentZoomLevel * 100).toFixed(0) }} %</span>
+        <button mat-mini-fab (click)="zoomService.zoomOut()">
           <mat-icon>remove</mat-icon>
         </button>
       </div>
