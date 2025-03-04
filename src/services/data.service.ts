@@ -12,8 +12,6 @@ export class DataService {
   currentDocId: number | null = null;
   currentPageId: number | null = null;
   annotation: Annotation[] = [];
-  isImage = false;
-  isText = false;
   currentAnnId = 0;
 
   constructor(private http: HttpClient) {
@@ -42,7 +40,6 @@ export class DataService {
       this.currentAnnId = +1;
       return `${this.currentDocId}-${this.currentPageId}-${this.currentAnnId}`;
     }
-
     // Тут нужно бы добавить всплывающую подсказку с ошибкой.
     return 'Не достаточно данных для генерации ID';
   }
