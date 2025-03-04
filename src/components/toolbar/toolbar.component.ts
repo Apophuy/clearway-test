@@ -20,7 +20,7 @@ export class ToolbarComponent {
   dataSubscription$: Subscription | undefined;
   constructor(
     private router: Router,
-    private dataService: DataService,
+    public dataService: DataService,
     public zoomService: ZoomService,
   ) {}
 
@@ -39,6 +39,10 @@ export class ToolbarComponent {
       this.currentPageName = '';
     }
   }
+
+  onSaveClick = () => {
+    return this.dataService.printAnnotation.apply(this.dataService);
+  };
 
   ngOnDestroy(): void {
     this.dataSubscription$?.unsubscribe();

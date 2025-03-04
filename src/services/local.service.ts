@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+// ! Не используется, решил хранить всё в памяти, включая картинки.
 @Injectable({
   providedIn: 'root',
 })
