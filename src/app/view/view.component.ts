@@ -9,7 +9,7 @@ import { PositionDirective } from '../../directives/position.directive';
 import { ResizeDirective } from '../../directives/resize.directive';
 import { DataService } from '../../services/data.service';
 import { ZoomService } from '../../services/zoom.service';
-import { Data } from '../../types';
+import { AnnotationItem, Data, Position } from '../../types';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
@@ -52,6 +52,34 @@ export class ViewComponent implements OnInit {
       exitAnimationDuration: '200ms',
     });
   }
+
+  getPageAnnotations = (pageId: number) => {
+    return (
+      this.dataService.annotation
+        .find((doc) => doc.docId === this.dataService.currentDocId)
+        ?.items.find((page) => page.pageId === pageId)?.items || []
+    );
+  };
+
+  onPositionChange = (item: AnnotationItem, position: Position) => {
+    if (this.dataService.currentDocId !== null && this.dataService.currentPageId !== null) {
+      const docIdx = this.dataService.annotation.findIndex(
+        (doc) => doc.docId === this.dataService.currentDocId,
+      );
+      const pageIdx = this.dataService.annotation[docIdx].items.findIndex(
+        (page) => page.pageId === this.dataService.currentPageId,
+      );
+      const itemIdx = this.dataService.annotation[docIdx].items[pageIdx].items.findIndex(
+        (entry) => entry.itemId === item.itemId,
+      );
+
+      this.dataService.annotation[docIdx].items[pageIdx].items.forEach((entry) => {
+        if (entry.itemId === item.itemId) {
+          entry.position = position;
+        }
+      });
+    }
+  };
 
   ngOnInit(): void {
     this.sub$ = this.route.params.subscribe((params) => {
