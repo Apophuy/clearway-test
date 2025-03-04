@@ -1,8 +1,8 @@
-export const getCurrentPageId = (url: string): number | null => {
+export const getCurrentDocId = (url: string): number | null => {
   const substr = '/viewer/view/';
   if (url.startsWith(substr)) {
-    const pageId = url.replace(substr, '');
-    return Number(pageId);
+    const docId = url.replace(substr, '');
+    return Number(docId);
   }
 
   return null;

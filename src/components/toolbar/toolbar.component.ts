@@ -7,7 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../services/data.service';
 import { ZoomService } from '../../services/zoom.service';
-import { getCurrentPageId } from '../../utils';
+import { getCurrentDocId } from '../../utils';
 
 @Component({
   selector: 'app-toolbar',
@@ -30,7 +30,7 @@ export class ToolbarComponent {
   }
 
   ngDoCheck(): void {
-    const pageId = getCurrentPageId(this.router.url);
+    const pageId = getCurrentDocId(this.router.url);
     if (pageId !== null) {
       this.dataSubscription$ = this.dataService.getDataByPage(pageId).subscribe((data) => {
         this.currentPageName = data.name;

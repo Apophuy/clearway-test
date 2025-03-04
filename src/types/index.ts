@@ -15,11 +15,13 @@ export interface Position {
 }
 
 export interface AnnotationItem {
-  data: string | File;
+  id: string;
+  data: string;
   position: Position;
 }
 
 export interface Annotation {
   pageId: number;
   items: AnnotationItem[];
+  imageUrl: string;
 }

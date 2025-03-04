@@ -24,3 +24,4 @@ ng build
 ## Используемые библиотеки:
 
 - Angular
+- Angular Material
