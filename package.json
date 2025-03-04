@@ -1,6 +1,6 @@
 {
   "name": "clearway-test",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Apophuy",
   "scripts": {
     "ng": "ng",

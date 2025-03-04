@@ -5,6 +5,9 @@
   cdkDrag
   (cdkDragEnded)="onDragEnd($event, data)"
 >
+  <button mat-mini-fab class="button" (click)="onDelete(data.itemId)">
+    <mat-icon>close</mat-icon>
+  </button>
   <div class="text__block" [ngClass]="{ hide: data.type === 'image' }">
     <span class="text">{{ data.type === 'text' ? data.data : '' }}</span>
   </div>

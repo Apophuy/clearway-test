@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Annotation, AnnotationItem, Data } from '../types';
+import { Annotation, AnnotationItem, Data, Position } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +51,63 @@ export class DataService {
     // Тут нужно бы добавить всплывающую подсказку с ошибкой.
     return null;
   }
+
+  onPositionChange = (item: AnnotationItem, position: Position) => {
+    if (this.currentDocId !== null && this.currentPageId !== null) {
+      const docIdx = this.annotation.findIndex((doc) => doc.docId === this.currentDocId);
+      const pageIdx = this.annotation[docIdx].items.findIndex(
+        (page) => page.pageId === this.currentPageId,
+      );
+      // const itemIdx = this.annotation[docIdx].items[pageIdx].items.findIndex(
+      //   (entry) => entry.itemId === item.itemId,
+      // );
+
+      this.annotation[docIdx].items[pageIdx].items.forEach((entry) => {
+        if (entry.itemId === item.itemId) {
+          entry.position = {
+            x: position.x,
+            y: position.y,
+          };
+        }
+      });
+      //======
+      // this.annotation = this.annotation.map((doc) => {
+      //   if (doc.docId === this.currentDocId) {
+      //     return {
+      //       docId: doc.docId,
+      //       items: doc.items.map((page) => {
+      //         if (page.pageId === this.currentPageId) {
+      //           return {
+      //             pageId: page.pageId,
+      //             items: page.items.map((entry) => {
+      //               if (entry.itemId === item.itemId) {
+      //                 return {
+      //                   ...entry,
+      //                   position,
+      //                 };
+      //               }
+      //               return entry;
+      //             }),
+      //           };
+      //         }
+      //         return page;
+      //       }),
+      //     };
+      //   }
+      //   return doc;
+      // });
+    }
+  };
+
+  onDeleteItem = (itemId: string) => {
+    if (this.currentDocId !== null && this.currentPageId !== null) {
+      const docIdx = this.annotation.findIndex((doc) => doc.docId === this.currentDocId);
+      const pageIdx = this.annotation[docIdx].items.findIndex(
+        (page) => page.pageId === this.currentPageId,
+      );
+      this.annotation[docIdx].items[pageIdx].items.filter((entry) => entry.itemId !== itemId);
+    }
+  };
 
   printAnnotation() {
     console.log('Annotations: ', this.annotation);
