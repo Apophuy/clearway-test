@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DragElementComponent } from '../../components/drag-element/drag-element.component';
 import { PositionDirective } from '../../directives/position.directive';
 import { ResizeDirective } from '../../directives/resize.directive';
 import { DataService } from '../../services/data.service';
@@ -13,24 +14,29 @@ import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-view',
-  imports: [CommonModule, ResizeDirective, PositionDirective, MatButtonModule],
+  imports: [
+    CommonModule,
+    ResizeDirective,
+    PositionDirective,
+    MatButtonModule,
+    DragElementComponent,
+  ],
   templateUrl: './view.component.html',
   styleUrl: './view.component.scss',
 })
 export class ViewComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-  @ViewChild('doc', { static: false }) doc: ElementRef<HTMLDivElement> | undefined;
+  @ViewChild('boundary', { static: false }) boundary: ElementRef<HTMLDivElement> | undefined;
+  sub$: Subscription | undefined;
+  pageId: number = 0;
+  data: Data | undefined;
+  dataSubscription$: Subscription | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
     public zoomService: ZoomService,
   ) {}
-
-  sub$: Subscription | undefined;
-  pageId: number = 0;
-  data: Data | undefined;
-  dataSubscription$: Subscription | undefined;
 
   openModal(itemNumber: number) {
     this.dialog.open(ModalComponent, {
