@@ -8,3 +8,18 @@ export interface Data {
   name: string;
   pages: Page[];
 }
+
+export interface Position {
+  x: number;
+  y: number;
+}
+
+export interface AnnotationItem {
+  data: string | File;
+  position: Position;
+}
+
+export interface Annotation {
+  pageId: number;
+  items: AnnotationItem[];
+}

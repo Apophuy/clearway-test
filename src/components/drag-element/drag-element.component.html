@@ -1,0 +1,14 @@
+<div
+  class="annotation"
+  cdkDragBoundary="boundary"
+  (click)="onAnnotationClick($event)"
+  cdkDrag
+  (cdkDragEnded)="onDragEnd($event)"
+>
+  <div class="text__block" ndClass="{hide: !!image}">
+    <span class="text"> Можно перемещать </span>
+  </div>
+  <div class="image__block" ndClass="{hide: !!text}">
+    <img src="" alt="" />
+  </div>
+</div>
