@@ -39,11 +39,21 @@ export class ViewComponent implements OnInit {
   ) {}
 
   openModal(itemNumber: number) {
+    // const currentPageId = itemNumber;
+    // const currentDocId = this.dataService.currentDocId;
+    const dialogData = {
+      docId: this.docId,
+      pageId: itemNumber,
+      getAnnId: this.dataService.getAnnId.bind(this.dataService),
+    };
     this.dataService.currentPageId = itemNumber;
     this.dialog.open(ModalComponent, {
+      data: dialogData,
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '200ms',
     });
+    // this.dataService.currentDocId = currentDocId;
+    // this.dataService.currentPageId = currentPageId;
   }
 
   ngOnInit(): void {
