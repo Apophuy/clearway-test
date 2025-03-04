@@ -17,7 +17,7 @@ import { Data } from '../../types';
 })
 export class ViewerComponent {
   data: Data[] = [];
-  showChild = false;
+  showDoc = false;
 
   dataSubscription$: Subscription | undefined;
 
@@ -33,8 +33,9 @@ export class ViewerComponent {
     });
   }
 
-  onShowChild(id: number): void {
-    this.showChild = !this.showChild;
+  onShowDoc(id: number): void {
+    this.dataService.currentDocId = id;
+    this.showDoc = !this.showDoc;
     this.router.navigate(['/viewer', 'view', id]);
   }
 

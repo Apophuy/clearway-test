@@ -8,7 +8,7 @@ export const routes: Routes = [
   {
     path: 'viewer',
     component: ViewerComponent,
-    children: [{ path: 'view/:pageId', component: ViewComponent }],
+    children: [{ path: 'view/:docId', component: ViewComponent }],
   },
   { path: '**', redirectTo: '' },
 ];
