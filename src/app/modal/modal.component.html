@@ -2,7 +2,7 @@
   <h2 mat-dialog-title>Добавить аннотацию</h2>
   <mat-dialog-content>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="Добавить текст" [disabled]="!!imageFile">
+      <mat-tab label="Добавить текст" [disabled]="dataService.isImage">
         <div class="tab__content">
           <input matInput placeholder="Введите текст" (input)="onTextEnter($event)" />
           <button mat-fab extended>
@@ -11,7 +11,7 @@
           </button>
         </div>
       </mat-tab>
-      <mat-tab label="Добавить изображение" [disabled]="!!inputText">
+      <mat-tab label="Добавить изображение" [disabled]="dataService.isText">
         <div class="tab__content">
           <input
             type="file"

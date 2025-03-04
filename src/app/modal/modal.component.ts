@@ -10,6 +10,7 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-modal',
@@ -28,10 +29,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrl: './modal.component.scss',
 })
 export class ModalComponent {
-  imageFile: File | undefined;
-  inputText = '';
-
-  constructor() {}
+  constructor(public dataService: DataService) {}
 
   onImportImageSelect(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -39,15 +37,28 @@ export class ModalComponent {
       return;
     }
 
-    this.imageFile = input.files[0];
+    const imageUrl = URL.createObjectURL(input.files[0]);
+    this.dataService.isImage = true;
+    console.log(
+      'currentDocId: ',
+      this.dataService.currentDocId,
+      'currentPageId: ',
+      this.dataService.currentPageId,
+    );
+
+    const imageKey = this.dataService.getAnnId();
+    console.log('imageKey: ', imageKey);
   }
 
   onTextEnter(event: Event) {
-    this.inputText = (event.target as HTMLInputElement).value;
+    const inputText = (event.target as HTMLInputElement).value;
+    const textKey = this.dataService.getAnnId();
+    this.dataService.isText = true;
   }
 
   onCancel() {
-    this.imageFile = undefined;
-    this.inputText = '';
+    this.dataService.isImage = false;
+    this.dataService.isText = false;
+    this.dataService.currentPageId = null;
   }
 }

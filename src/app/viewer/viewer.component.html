@@ -1,7 +1,7 @@
-<div class="viewer" *ngIf="showChild === false; else child">
+<div class="viewer" *ngIf="showDoc === false; else child">
   <mat-list role="list">
     <mat-list-item *ngFor="let doc of data" role="listitem">
-      <a mat-fab extended (click)="onShowChild(doc.docId)">
+      <a mat-fab extended (click)="onShowDoc(doc.docId)">
         <mat-icon>pageview</mat-icon>
         {{ `Посмотреть документ №${doc.docId} - ${doc.name}` }}
       </a>

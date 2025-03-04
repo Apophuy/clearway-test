@@ -28,7 +28,7 @@ export class ViewComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   @ViewChild('boundary', { static: false }) boundary: ElementRef<HTMLDivElement> | undefined;
   sub$: Subscription | undefined;
-  pageId: number = 0;
+  docId: number = 0;
   data: Data | undefined;
   dataSubscription$: Subscription | undefined;
 
@@ -39,6 +39,7 @@ export class ViewComponent implements OnInit {
   ) {}
 
   openModal(itemNumber: number) {
+    this.dataService.currentPageId = itemNumber;
     this.dialog.open(ModalComponent, {
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '200ms',
@@ -47,10 +48,10 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub$ = this.route.params.subscribe((params) => {
-      this.pageId = params['pageId'];
+      this.docId = params['docId'];
     });
-
-    this.dataSubscription$ = this.dataService.getDataByPage(this.pageId).subscribe((data) => {
+    // Можно объединить
+    this.dataSubscription$ = this.dataService.getDataByPage(this.docId).subscribe((data) => {
       this.data = data;
     });
   }
