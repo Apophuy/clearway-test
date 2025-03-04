@@ -34,7 +34,7 @@ export class ViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataService,
+    public dataService: DataService,
     public zoomService: ZoomService,
   ) {}
 
@@ -61,26 +61,6 @@ export class ViewComponent implements OnInit {
     );
   };
 
-  onPositionChange = (item: AnnotationItem, position: Position) => {
-    if (this.dataService.currentDocId !== null && this.dataService.currentPageId !== null) {
-      const docIdx = this.dataService.annotation.findIndex(
-        (doc) => doc.docId === this.dataService.currentDocId,
-      );
-      const pageIdx = this.dataService.annotation[docIdx].items.findIndex(
-        (page) => page.pageId === this.dataService.currentPageId,
-      );
-      const itemIdx = this.dataService.annotation[docIdx].items[pageIdx].items.findIndex(
-        (entry) => entry.itemId === item.itemId,
-      );
-
-      this.dataService.annotation[docIdx].items[pageIdx].items.forEach((entry) => {
-        if (entry.itemId === item.itemId) {
-          entry.position = position;
-        }
-      });
-    }
-  };
-
   ngOnInit(): void {
     this.sub$ = this.route.params.subscribe((params) => {
       this.docId = params['docId'];
@@ -90,6 +70,13 @@ export class ViewComponent implements OnInit {
       this.data = data;
     });
   }
+
+  onChangePosition = (item: AnnotationItem, position: Position) => {
+    return this.dataService.onPositionChange(item, position);
+  };
+  onDeleteItem = (itemId: string) => {
+    return this.dataService.onDeleteItem.bind(this.dataService, itemId);
+  };
 
   ngOnDestroy(): void {
     this.sub$?.unsubscribe();
