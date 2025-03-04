@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Annotation, AnnotationItem, Data, Page } from '../types';
+import { Annotation, AnnotationItem, Data } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +14,7 @@ export class DataService {
   annotation: Annotation[] = [];
   currentAnnId = 0;
 
-  constructor(private http: HttpClient) {
-    console.log('tut');
-  }
+  constructor(private http: HttpClient) {}
 
   getAllData(): Observable<Data[]> {
     return this.http.get<Data>(this.jsonDataUrl).pipe(map((data) => [data]));
@@ -26,12 +24,21 @@ export class DataService {
     return this.getAllData().pipe(map((data) => data[pageId - 1]));
   }
 
-  addAnnotationItem(item: AnnotationItem, page: Page, docId: number) {
-    const currentPage = this.annotation.find((a) => a.pageId === page.pageId);
-    if (!currentPage) {
-      this.annotation.push({ pageId: page.pageId, items: [item], imageUrl: page.imageUrl });
-    } else {
-      currentPage.items.push(item);
+  addAnnotationItem(item: AnnotationItem) {
+    if (this.currentDocId !== null && this.currentPageId !== null) {
+      let docIdx = this.annotation.findIndex((doc) => doc.docId === this.currentDocId);
+      if (docIdx === -1) {
+        this.annotation.push({ docId: this.currentDocId, items: [] });
+        docIdx = 0;
+      }
+      let pageIdx = this.annotation[docIdx].items.findIndex(
+        (page) => page.pageId === this.currentPageId,
+      );
+      if (pageIdx === -1) {
+        this.annotation[docIdx].items.push({ pageId: this.currentPageId, items: [] });
+        pageIdx = 0;
+      }
+      this.annotation[docIdx].items[pageIdx].items.push(item);
     }
   }
 
@@ -41,10 +48,10 @@ export class DataService {
       return `${this.currentDocId}-${this.currentPageId}-${this.currentAnnId}`;
     }
     // Тут нужно бы добавить всплывающую подсказку с ошибкой.
-    return 'Не достаточно данных для генерации ID';
+    return null;
   }
 
   printAnnotation() {
-    console.log(this.annotation);
+    console.log('Annotations: ', this.annotation);
   }
 }

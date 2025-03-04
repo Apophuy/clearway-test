@@ -4,7 +4,7 @@
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="Добавить текст" [disabled]="isImage">
         <div class="tab__content">
-          <input matInput placeholder="Введите текст" (input)="onTextEnter($event)" />
+          <input matInput placeholder="Введите текст" (change)="onTextEnter($event)" />
           <button mat-fab extended>
             <mat-icon>text_fields</mat-icon>
             Добавить текст
