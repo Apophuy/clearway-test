@@ -27,5 +27,14 @@
 
 .text {
   color: var(--mat-sys-on-primary);
+  font-weight: bold;
   opacity: 1;
+}
+
+.hide {
+  display: none;
+}
+
+.image {
+  opacity: 0.5;
 }

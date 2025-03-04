@@ -3,12 +3,12 @@
   cdkDragBoundary="boundary"
   (click)="onAnnotationClick($event)"
   cdkDrag
-  (cdkDragEnded)="onDragEnd($event)"
+  (cdkDragEnded)="onDragEnd($event, data)"
 >
-  <div class="text__block" ndClass="{hide: !!image}">
-    <span class="text"> Можно перемещать </span>
+  <div class="text__block" [ngClass]="{ hide: data.type === 'image' }">
+    <span class="text">{{ data.type === 'text' ? data.data : '' }}</span>
   </div>
-  <div class="image__block" ndClass="{hide: !!text}">
-    <img src="" alt="" />
+  <div class="image__block" [ngClass]="{ hide: data.type === 'text' }">
+    <img class="image" [src]="data.type === 'image' ? data.data : ''" alt="Image" />
   </div>
 </div>

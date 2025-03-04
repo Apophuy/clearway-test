@@ -44,8 +44,9 @@ export class DataService {
 
   getAnnId() {
     if (this.currentDocId && this.currentPageId) {
-      this.currentAnnId = +1;
-      return `${this.currentDocId}-${this.currentPageId}-${this.currentAnnId}`;
+      const id = `${this.currentDocId}-${this.currentPageId}-${this.currentAnnId}`;
+      this.currentAnnId += 1;
+      return id;
     }
     // Тут нужно бы добавить всплывающую подсказку с ошибкой.
     return null;
