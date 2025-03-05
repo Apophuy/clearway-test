@@ -71,6 +71,8 @@ export class ViewComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {}
+
   onChangePosition = (item: AnnotationItem, position: Position) => {
     return this.dataService.onPositionChange(item, position);
   };

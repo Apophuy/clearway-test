@@ -7,6 +7,7 @@
           [data]="annotation"
           [boundaryId]="{ nativeElement: boundary }"
           [changePosition]="onChangePosition"
+          [savedPosition]="annotation.position"
         ></app-drag-element>
       </div>
       <img class="image__item" matListAvatar [src]="`/data/${image.imageUrl}`" />
