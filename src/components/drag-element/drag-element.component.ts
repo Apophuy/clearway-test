@@ -12,7 +12,7 @@ import { AnnotationItem, Position } from '../../types';
   styleUrl: './drag-element.component.scss',
 })
 export class DragElementComponent {
-  @Input() boundaryId?: ElementRef<HTMLDivElement>;
+  @Input() boundary!: string | ElementRef<HTMLDivElement>;
   @Input() data!: AnnotationItem;
   @Input() changePosition!: (item: AnnotationItem, position: Position) => void;
   @Input() deleteItem!: (itemId: string) => void;

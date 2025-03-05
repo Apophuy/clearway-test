@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -26,7 +26,7 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class ViewComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-  @ViewChild('boundary', { static: false }) boundary: ElementRef<HTMLDivElement> | undefined;
+  // @ViewChildren('boundary') boundaryCollection: QueryList<HTMLDivElement> | undefined;
   sub$: Subscription | undefined;
   docId: number = 0;
   data: Data | undefined;
