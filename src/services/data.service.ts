@@ -71,6 +71,8 @@ export class DataService {
   };
 
   onDeleteItem = (itemId: string) => {
+    console.log('onDeleteItem: ', itemId);
+
     if (this.currentDocId !== null && this.currentPageId !== null) {
       const docIdx = this.annotation.findIndex((doc) => doc.docId === this.currentDocId);
       const pageIdx = this.annotation[docIdx].items.findIndex(
@@ -78,6 +80,7 @@ export class DataService {
       );
       this.annotation[docIdx].items[pageIdx].items.filter((entry) => entry.itemId !== itemId);
     }
+    console.log('annotation: ', this.annotation);
   };
 
   printAnnotation() {
