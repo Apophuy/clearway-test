@@ -71,16 +71,15 @@ export class DataService {
   };
 
   onDeleteItem = (itemId: string) => {
-    console.log('onDeleteItem: ', itemId);
-
-    if (this.currentDocId !== null && this.currentPageId !== null) {
-      const docIdx = this.annotation.findIndex((doc) => doc.docId === this.currentDocId);
-      const pageIdx = this.annotation[docIdx].items.findIndex(
-        (page) => page.pageId === this.currentPageId,
-      );
-      this.annotation[docIdx].items[pageIdx].items.filter((entry) => entry.itemId !== itemId);
-    }
-    console.log('annotation: ', this.annotation);
+    const attrArray = itemId.split('-');
+    const docId = Number(attrArray[0]);
+    const pageId = Number(attrArray[1]);
+    const docIdx = this.annotation.findIndex((doc) => doc.docId === docId);
+    const pageIdx = this.annotation[docIdx].items.findIndex((page) => page.pageId === pageId);
+    const itemIdx = this.annotation[docIdx].items[pageIdx].items.findIndex(
+      (entry) => entry.itemId === itemId,
+    );
+    this.annotation[docIdx].items[pageIdx].items.splice(itemIdx, 1);
   };
 
   printAnnotation() {
