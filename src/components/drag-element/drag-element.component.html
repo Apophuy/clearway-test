@@ -1,6 +1,6 @@
 <div
   class="annotation"
-  cdkDragBoundary="boundary"
+  [cdkDragBoundary]="boundary"
   (click)="onAnnotationClick($event)"
   cdkDrag
   (cdkDragEnded)="onDragEnd($event, data)"
