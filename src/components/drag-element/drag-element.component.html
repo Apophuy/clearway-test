@@ -4,6 +4,7 @@
   (click)="onAnnotationClick($event)"
   cdkDrag
   (cdkDragEnded)="onDragEnd($event, data)"
+  #dragElement
 >
   <button mat-mini-fab class="button" (click)="onDelete(data.itemId)">
     <mat-icon>close</mat-icon>

@@ -58,9 +58,6 @@ export class DataService {
       const pageIdx = this.annotation[docIdx].items.findIndex(
         (page) => page.pageId === this.currentPageId,
       );
-      // const itemIdx = this.annotation[docIdx].items[pageIdx].items.findIndex(
-      //   (entry) => entry.itemId === item.itemId,
-      // );
 
       this.annotation[docIdx].items[pageIdx].items.forEach((entry) => {
         if (entry.itemId === item.itemId) {
@@ -70,32 +67,6 @@ export class DataService {
           };
         }
       });
-      //======
-      // this.annotation = this.annotation.map((doc) => {
-      //   if (doc.docId === this.currentDocId) {
-      //     return {
-      //       docId: doc.docId,
-      //       items: doc.items.map((page) => {
-      //         if (page.pageId === this.currentPageId) {
-      //           return {
-      //             pageId: page.pageId,
-      //             items: page.items.map((entry) => {
-      //               if (entry.itemId === item.itemId) {
-      //                 return {
-      //                   ...entry,
-      //                   position,
-      //                 };
-      //               }
-      //               return entry;
-      //             }),
-      //           };
-      //         }
-      //         return page;
-      //       }),
-      //     };
-      //   }
-      //   return doc;
-      // });
     }
   };
 
