@@ -12,6 +12,7 @@
         [boundary]="`.image-${image.pageId}`"
         [changePosition]="onChangePosition"
         [savedPosition]="annotation.position"
+        [deleteItem]="onDeleteItem"
       ></app-drag-element>
       <img class="image__item" matListAvatar [src]="`/data/${image.imageUrl}`" />
     </div>
