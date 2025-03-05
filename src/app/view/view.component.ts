@@ -77,7 +77,7 @@ export class ViewComponent implements OnInit {
     return this.dataService.onPositionChange(item, position);
   };
   onDeleteItem = (itemId: string) => {
-    return this.dataService.onDeleteItem.bind(this.dataService, itemId);
+    this.dataService.onDeleteItem(itemId);
   };
 
   ngOnDestroy(): void {
