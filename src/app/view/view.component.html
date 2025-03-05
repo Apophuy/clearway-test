@@ -1,15 +1,18 @@
 <div class="view">
   <div class="list" appResize [zoom]="zoomService.currentZoomLevel" appPosition>
-    <div *ngFor="let image of data?.pages" class="image">
-      <div class="boundary" #boundary (click)="openModal(image.pageId)">
-        <app-drag-element
-          *ngFor="let annotation of getPageAnnotations(image.pageId)"
-          [data]="annotation"
-          [boundaryId]="{ nativeElement: boundary }"
-          [changePosition]="onChangePosition"
-          [savedPosition]="annotation.position"
-        ></app-drag-element>
-      </div>
+    <div
+      *ngFor="let image of data?.pages"
+      class="image"
+      (click)="openModal(image.pageId)"
+      [ngClass]="`image-${image.pageId}`"
+    >
+      <app-drag-element
+        *ngFor="let annotation of getPageAnnotations(image.pageId)"
+        [data]="annotation"
+        [boundary]="`.image-${image.pageId}`"
+        [changePosition]="onChangePosition"
+        [savedPosition]="annotation.position"
+      ></app-drag-element>
       <img class="image__item" matListAvatar [src]="`/data/${image.imageUrl}`" />
     </div>
   </div>
