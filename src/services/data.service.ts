@@ -28,15 +28,21 @@ export class DataService {
     if (this.currentDocId !== null && this.currentPageId !== null) {
       let docIdx = this.annotation.findIndex((doc) => doc.docId === this.currentDocId);
       if (docIdx === -1) {
-        this.annotation.push({ docId: this.currentDocId, items: [] });
         docIdx = 0;
+        this.annotation.push({ docId: this.currentDocId, items: [] });
       }
       let pageIdx = this.annotation[docIdx].items.findIndex(
         (page) => page.pageId === this.currentPageId,
       );
+
       if (pageIdx === -1) {
+        const pageLength = this.annotation[docIdx].items.length;
+        if (pageLength !== 0) {
+          pageIdx = pageLength;
+        } else {
+          pageIdx = 0;
+        }
         this.annotation[docIdx].items.push({ pageId: this.currentPageId, items: [] });
-        pageIdx = 0;
       }
       this.annotation[docIdx].items[pageIdx].items.push(item);
     }
