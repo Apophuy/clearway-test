@@ -39,13 +39,13 @@ export class ViewComponent implements OnInit {
   ) {}
 
   openModal(itemNumber: number) {
+    this.dataService.currentPageId = itemNumber;
     const dialogData = {
       docId: this.docId,
       pageId: itemNumber,
       getAnnId: this.dataService.getAnnId.bind(this.dataService),
       addItem: this.dataService.addAnnotationItem.bind(this.dataService),
     };
-    this.dataService.currentPageId = itemNumber;
     this.dialog.open(ModalComponent, {
       data: dialogData,
       enterAnimationDuration: '300ms',
